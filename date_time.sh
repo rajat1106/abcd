@@ -1,0 +1,2 @@
+echo "the date"
+date

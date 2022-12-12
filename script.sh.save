@@ -1,0 +1,7 @@
+echo "Enter file name"
+read filename
+
+echo "$(touch $filename)"
+echo "file created successfully"
+bash: line 1: ^T: command not found
+

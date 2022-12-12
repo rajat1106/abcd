@@ -1,0 +1,97 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main()
+{
+int n,m,i,j,k;
+printf("This will show implementation of bankers algorithm\n\n");
+printf("Enter the no of processes:");
+scanf("%d",&n);
+printf("Enter the no of resources:");
+scanf("%d",&m);
+int alloc[n][m],max[n][m],avail[m],need[n][m],flag[n],iteration,count=0;
+printf("Enter the allocation matrix:\n\n");
+
+for(i=0;i<n;i++)
+{
+for(j=0;j<m;j++)
+{
+scanf("%d",&alloc[i][j]);
+}
+}
+
+printf("Enter the max matrix:\n\n");
+for(i=0;i<n;i++)
+{
+for(j=0;j<m;j++)
+{
+scanf("%d",&max[i][j]);
+}
+}
+
+printf("Enter the available matrix:");
+
+for(j=0;j<m;j++)
+{
+scanf("%d",&avail[j]);
+}
+
+printf("need matrix:\n\n");
+//need calulation
+for(i=0;i<n;i++)
+{
+for(j=0;j<m;j++)
+{
+need[i][j]=max[i][j]-alloc[i][j];
+printf("%d  ",need[i][j]);
+}
+printf("\n");
+}
+
+//flag initialization
+for(i=0;i<n;i++)
+{
+flag[i]=0;
+}
+
+//execution starts
+for(iteration=1;iteration<=n;iteration++)
+{
+    printf("***********************************this is iteration %d ******************************\n\n\n\n",iteration);
+for(k=0;k<n;k++)
+{
+    if(flag[k]==0)
+    {
+        for(j=0;j<m;j++)
+        {
+            if(need[k][j]>avail[j])
+            {
+                break;
+            }
+        }
+        if(j==m)
+        {   
+            printf("here for process %d available is greater than need thus it is safe\n\n",k); 
+            getchar();
+            for(j=0;j<m;j++)
+            {
+                avail[j]=avail[j]+alloc[k][j];
+            }
+            flag[k]=1;
+            count++;
+           
+        }
+    }
+    if(count==n)
+    {
+        printf("\n\nIt took total %d iterations to complete the execution",iteration);
+        exit(0);
+
+    }
+
+}
+}
+printf("It is not safe");
+
+}
+
